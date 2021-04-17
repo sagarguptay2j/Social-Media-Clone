@@ -1,0 +1,16 @@
+{% extends 'posts/post_base.html' %}
+
+{% block post_content %}
+<div class="col-md-4">
+  <h3>@{{view.referenced_user}}</h3>
+  <h4>user</h4>
+</div
+
+
+<div class="col-md-8">
+  {% for single_post in view.post_list %}
+    <h4>POST</h4>
+    {% include 'posts/_post.html' %}
+  {% endfor%}
+</div>
+{% endblock %}

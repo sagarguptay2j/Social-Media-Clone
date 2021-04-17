@@ -1,0 +1,45 @@
+{% extends 'posts/post_base.html' %}
+
+{% block prepost %}
+<div class="col-md-4">
+  {% if user.is_authenticated %}
+  <div class="card card-with-shadow">
+    <div class="content">
+      <a class="btn btn-primary btn-large" href="{% url 'posts:new' %}"><span class="glyphicon glyphicon-plus-sign">Create</span></a>
+      <h1 class="title">Your Groups</h1>
+        {% for member_group in view.user_groups %}
+        <ul class="list-unstyled">
+          <li class="group li-with-bullet"><a href="{% url 'groups:single' slug=member_group.slug %}">{{member_group.name}}</a></li>
+            {% endfor %}
+        </ul>
+
+    </div>
+
+  </div>
+  {% endif %}
+  <div class="card card-with-shadow">
+    <div class="content">
+      <h1 class="title">Other Groups</h1>
+        {% for other_group in get_other_groups %}
+        <ul class="list-unstyled">
+          <li class="group li-with-bullet"><a href="{% url 'groups:single' slug=member_group.group.slug %}"></a></li>
+            {% endfor %}
+        </ul>
+
+    </div>
+
+  </div>
+
+
+</div>
+
+{% endblock %}
+
+{% block post_content %}
+<div class="col-md-8">
+  {% for post in post_all %}
+  {% include 'posts/_post.html' %}
+  {% endfor %}
+
+</div>
+{% endblock %}
